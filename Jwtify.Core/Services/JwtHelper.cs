@@ -13,4 +13,7 @@ public sealed class JwtHelper(ITokenGenerator tokenGenerator, ITokenValidator to
 
     public string? GenerateRefreshToken()
         => refreshTokenService.GenerateRefreshToken();
+
+    public bool ValidateRefreshToken(string token)
+        => refreshTokenService.ValidateRefreshToken(token);
 }

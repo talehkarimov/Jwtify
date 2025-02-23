@@ -1,4 +1,5 @@
 ﻿using Jwtify.Core.Abstractions;
+using Jwtify.Core.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace Jwtify.Core.Middleware;
@@ -6,18 +7,34 @@ namespace Jwtify.Core.Middleware;
 public class JwtMiddleware
 {
     private readonly RequestDelegate _next;
-
-    public JwtMiddleware(RequestDelegate next)
+    private readonly JwtOptions _jwtOptions;
+    public JwtMiddleware(RequestDelegate next, JwtOptions jwtOptions)
     {
         _next = next;
+        _jwtOptions = jwtOptions;
     }
 
-    public async Task Invoke(HttpContext context, IJwtHelper jwtHelper)
+    public async Task Invoke(HttpContext context, IJwtHelper jwtHelper, IRefreshTokenService refreshTokenService)
     {
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-        if (token != null && jwtHelper.ValidateToken(token, out _))
+        if (token != null && jwtHelper.ValidateToken(token, out var claims))
         {
-            context.Items["User"] = jwtHelper.ValidateToken(token, out var claims) ? claims : null;
+            context.Items["User"] = claims;
+
+            if (_jwtOptions.EnableRefreshToken)
+            {
+                var refreshToken = context.Request.Headers["Refresh-Token"].FirstOrDefault();
+                if (refreshToken != null && refreshTokenService.ValidateRefreshToken(refreshToken))
+                {
+                    var tokenResult = jwtHelper.GenerateToken(claims);
+                    context.Response.Headers["New-Access-Token"] = tokenResult.AccessToken;
+
+                    if (!string.IsNullOrEmpty(tokenResult.RefreshToken))
+                    {
+                        context.Response.Headers["New-Refresh-Token"] = tokenResult.RefreshToken;
+                    }
+                }
+            }
         }
 
         await _next(context);

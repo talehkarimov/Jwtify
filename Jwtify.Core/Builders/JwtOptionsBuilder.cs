@@ -35,5 +35,11 @@ public sealed class JwtOptionsBuilder
         return this;
     }
 
+    public JwtOptionsBuilder WithRefreshToken(bool enabled)
+    {
+        _options.EnableRefreshToken = enabled;
+        return this;
+    }
+
     public JwtOptions Build() => _options;
 }
