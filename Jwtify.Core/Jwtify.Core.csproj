@@ -9,7 +9,6 @@
 		<Description>Jwtify.Core is a lightweight, easy-to-use library for working with JSON Web Tokens (JWT) in .NET applications. It provides a flexible and customizable JWT helper with simple configuration and integration.</Description>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/talehkarimov/Jwtify</RepositoryUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
