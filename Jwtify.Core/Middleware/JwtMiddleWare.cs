@@ -34,6 +34,12 @@ public class JwtMiddleware
                         context.Response.Headers["New-Refresh-Token"] = tokenResult.RefreshToken;
                     }
                 }
+                else
+                {
+                    context.Response.StatusCode = 400;
+                    await context.Response.WriteAsync("Invalid refresh token");
+                    return;
+                }
             }
         }
 

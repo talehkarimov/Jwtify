@@ -31,7 +31,12 @@ namespace Jwtify.Core.Extensions
             services.AddScoped<IJwtHelper, JwtHelper>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<ITokenValidator, TokenValidator>();
-            services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+
+
+            if (options.EnableRefreshToken)
+            {
+                services.AddSingleton<IRefreshTokenService, RefreshTokenService>();
+            }
 
             return services;
         }
