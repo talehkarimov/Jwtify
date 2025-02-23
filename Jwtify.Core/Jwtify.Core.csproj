@@ -1,15 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageId>Jwtify.Core</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Taleh Karimov</Authors>
+		<Description>Jwtify.Core is a lightweight, easy-to-use library for working with JSON Web Tokens (JWT) in .NET applications. It provides a flexible and customizable JWT helper with simple configuration and integration.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/talehkarimov/Jwtify</RepositoryUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.6.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.6.0" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.6.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.6.0" />
+	</ItemGroup>
 </Project>
