@@ -12,6 +12,12 @@ public sealed class JwtOptionsBuilder
         return this;
     }
 
+    public JwtOptionsBuilder WithAudience(string audience)
+    {
+        _options.Audience = audience;
+        return this;
+    }
+
     public JwtOptionsBuilder WithIssuer(string issuer)
     {
         _options.Issuer = issuer;
